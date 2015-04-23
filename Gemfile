@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.beta1'
+# Active Record bug fix
+gem 'arel', '6.0.0.beta2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -46,3 +48,7 @@ group :development, :test do
   gem 'spring'
 end
 
+  # Authentication
+  gem 'devise'
+  # Annotate ActiveRecord models
+  gem 'annotate', '~> 2.6.5', group: :development

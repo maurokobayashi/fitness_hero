@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @aluno.first_name %>
+</p>
+
+<p>
+  <strong>last_name:</strong>
+  <%= @aluno.last_name %>
+</p>
+
+<p>
+  <strong>Birthdate:</strong>
+  <%= @aluno.birthdate %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @aluno.email %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @aluno.mobile %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @aluno.gender %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @aluno.avatar %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @aluno.status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @aluno.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_aluno_path(@aluno) %> |
+<%= link_to 'Back', alunos_path %>
