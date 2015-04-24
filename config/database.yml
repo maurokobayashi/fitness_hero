@@ -17,7 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: fitness_hero
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -25,6 +24,7 @@ default: &default
 development:
   <<: *default
   database: fitness_hero_development
+  username: fitness_hero
   password: fitness_hero
   host: localhost
 
@@ -38,6 +38,7 @@ development:
 test:
   <<: *default
   database: fitness_hero_test
+  username: fitness_hero
   password: fitness_hero
   host: localhost
 
@@ -62,6 +63,4 @@ test:
 #
 production:
   <<: *default
-  database: fitness_hero_production
-  username: fitness_hero
-  password: <%= ENV['FITNESS_HERO_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
