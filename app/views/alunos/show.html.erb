@@ -1,49 +1,514 @@
-<p id="notice"><%= notice %></p>
+<style type="text/css">
+  .content {
+    margin-top: 10px;
+  }
+  .tabs {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  form.profile .row {
+    margin-bottom: 0;
+  }
+  .select-wrapper input.select-dropdown {
+    padding-top: 15px;
+    height: 2.4rem;
+  }
+  .select-wrapper .mdi-navigation-arrow-drop-down {
+    top: 1rem;
+  }
+  .switch {
+    margin-top: 8px;
+  }
+  .collection-item i.secondary-content.right {
+    float: right;
+    margin-right: 5px;
+    font-size: 1.6rem;
+    color: #333;
+  }
+</style>
 
-<p>
-  <strong>First name:</strong>
-  <%= @aluno.first_name %>
-</p>
+<!-- Navbar : begin -->
+<%= render "commons/navbar", back_href: alunos_path, title: @aluno.fullname %>
+<!-- Navbar : end -->
 
-<p>
-  <strong>last_name:</strong>
-  <%= @aluno.last_name %>
-</p>
+<!-- Sidenav : begin -->
+<%= render "commons/sidenav" %>
+<!-- Sidenav : end -->
 
-<p>
-  <strong>Birthdate:</strong>
-  <%= @aluno.birthdate %>
-</p>
+<div class="row">
+  <div class="col s12 no-padding">
+    <ul class="tabs">
+      <li class="tab col s3"><a class="active" href="#profile"><i class="mdi-social-person" style="font-size: 1.8em; top: 5px; position: relative;"></i> Perfil</a></li>
+      <li class="tab col s3"><a href="#workouts"><i class="mdi-action-assignment small" style="font-size: 1.6em; top: 5px; position: relative;"></i> Treinos</a></li>
+    </ul>
+  </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @aluno.email %>
-</p>
+  <!-- Perfil : begin -->
+  <div id="profile" class="col s12 no-padding">
+    <div class="row valign-wrapper">
+      <div class="col s6">
+        <div class="file-field input-field">
+          <img src="<%= @aluno.avatar %>" alt="" style="width: 110px; border-radius: 50%; margin-left: 10px;">
+        </div>
+      </div>
+      <div class="col s6 valign">
+        <a href="<%= edit_aluno_path @aluno %>" class="waves-effect waves-light btn right" style="top: 1em; margin-right: 10px;">Editar perfil</a>
+      </div>
+    </div>
+    <div class="row valign-wrapper">
+      <div class="col s12 no-padding">
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              Dados pessoais
+            </div>
+            <div class="collapsible-body">
+              <ul class="collection no-border">
+                <a class="collection-item">
+                  <small>Nome completo</small>
+                  <span class="secondary-content"><%= @aluno.fullname %></span>
+                </a>
+                <a class="collection-item">
+                  <small>Email</small>
+                  <span class="secondary-content"><%= @aluno.email %></span>
+                </a>
+                <a class="collection-item">
+                  <small>Celular</small>
+                  <span class="secondary-content"><%= @aluno.mobile %></span>
+                </a>
+                <a class="collection-item">
+                  <small>Idade</small>
+                  <span class="secondary-content"><%= @aluno.age %> anos</span>
+                </a>
+                <a class="collection-item">
+                  <small>Nascimento</small>
+                  <span class="secondary-content"><%= date_to_str @aluno.birthdate %></span>
+                </a>
+                <a class="collection-item">
+                  <small>Sexo</small>
+                  <span class="secondary-content"><%= @aluno.humanize_gender %></span>
+                </a>
+                <a class="collection-item modal-trigger" href="#modalLocation" style="border-bottom: none;">
+                  <small>Local de treino</small>
+                  <span class="secondary-content">Condomínio New Place
+                    <i class="mdi-navigation-chevron-right"></i>
+                  </span>
+                </a>
 
-<p>
-  <strong>Mobile:</strong>
-  <%= @aluno.mobile %>
-</p>
+                <!-- Modal location : begin -->
+                <div id="modalLocation" class="modal">
+                  <div class="modal-content">
+                    <h4>Condomínio New Place</h4>
+                    <span>
+                      Av. Faria Lima, 2927 - 8. andar<br>
+                      Itaim Bibi - São Paulo/SP<br>
+                      <br>
+                      [mapa]
+                    </span>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
+                  </div>
+                </div>
+                <!-- Modal location : end -->
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              Anamnese
+            </div>
+            <div class="collapsible-body">
+              <ul class="collection no-border">
+                <a class="collection-item">
+                  <small>Objetivo do treino</small>
+                  <span class="secondary-content">Hipertrofia</span>
+                </a>
+                <a class="collection-item">
+                  <small>Objetivos secundários</small>
+                  <span class="secondary-content">-</span>
+                </a>
+                <a class="collection-item">
+                  <small>Frequeência de treinos</small>
+                  <span class="secondary-content">3x por semana</span>
+                </a>
+                <a class="collection-item">
+                  <small>Período preferencial</small>
+                  <span class="secondary-content">Noite</span>
+                </a>
+                <a class="collection-item">
+                  <small>Peso</small>
+                  <span class="secondary-content">58 kg</span>
+                </a>
+                <a class="collection-item">
+                  <small>Altura</small>
+                  <span class="secondary-content">167 cm</span>
+                </a>
+                <a class="collection-item">
+                  <small>Nível de condicionamento</small>
+                  <span class="secondary-content">Intermediário</span>
+                </a>
+                <a class="collection-item">
+                  <small>Pressão arterial</small>
+                  <span class="secondary-content">12.8 x 9.1</span>
+                </a>
+                <a class="collection-item">
+                  <small>F.C. em repouso</small>
+                  <span class="secondary-content">86 bpm</span>
+                </a>
+                <a class="collection-item">
+                  <small>Doenças anteriores</small>
+                  <span class="secondary-content">-</span>
+                </a>
+                <a class="collection-item">
+                  <small>Lesões anteriores</small>
+                  <span class="secondary-content">-</span>
+                </a>
+                <a class="collection-item">
+                  <small>Cirurgias anteriores</small>
+                  <span class="secondary-content">-</span>
+                </a>
+                <a class="collection-item">
+                  <small>Observações</small>
+                  <span class="secondary-content">Pratica Yoga há 3 anos</span>
+                </a>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              PAR-Q
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <form class="col s12 profile">
+                  <ul class="collection">
+                    <li class="collection-item">
+                      <div>
+                        1. Seu médico já disse que você possui um problema cardíaco e recomendou atividades físicas apenas sob supervisão médica?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox" checked>
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        2. Você tem dor no peito provocada por atividades físicas?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox" checked>
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        3. Você sentiu dor no peito no último mês?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        4. Você já perdeu a consciência em alguma ocasião ou sofreu alguma queda em virtude de tontura?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        5.Você tem algum problema ósseo ou articular que poderia agravar-se com a prática de atividades físicas?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        6. Algum médico já lhe prescreveu medicamento para pressão arterial ou para o coração?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox" checked>
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div>
+                        7. Você tem conhecimento, por informação médica ou pela própria experiência, de algum motivo que poderia impedí-lo de participar de atividades fisicas sem supervisão médica?
+                        <div class="switch">
+                          <label>
+                            Não
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Sim
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              Medidas corporais
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <form class="col s12 profile">
 
-<p>
-  <strong>Gender:</strong>
-  <%= @aluno.gender %>
-</p>
+                  <p style="color: #ee6e73; padding: 25px 0 0 5px;">Perímetro (centímetros)</p>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Tórax</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Cintura</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Abdômem</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Quadril</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Braço esquerdo</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Braço direito</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Antebraço esquerdo</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Antebraço direito</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Coxa esquerda</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Coxa direita</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Panturrilha esquerda</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Panturrilha direita</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="textarea1" class="materialize-textarea" length="255"></textarea>
+                      <label for="textarea1">Outras medidas</label>
+                    </div>
+                  </div>
 
-<p>
-  <strong>Avatar:</strong>
-  <%= @aluno.avatar %>
-</p>
+                  <p style="color: #ee6e73; padding: 35px 0 0 5px;">Dobras cutâneas (milímetros)</p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @aluno.status %>
-</p>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Tríceps</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Peito</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Sub-axilar</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Sub-escapular</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Abdominal</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cintura" type="number" class="validate" length="3">
+                      <label for="cintura">Supra-ilíaca</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="torax" type="number" class="validate" length="3">
+                      <label for="torax">Coxa</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="textarea1" class="materialize-textarea" length="255"></textarea>
+                      <label for="textarea1">Outras medidas</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              Fotos
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <div class="slider">
+                  <ul class="slides">
+                    <li>
+                      <img src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
+                      <div class="caption center-align">
+                        <h3>Frente</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
+                      <div class="caption left-align">
+                        <h3>Perfil</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+                      <div class="caption right-align">
+                        <h3>Abdômem</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+                      <div class="caption center-align">
+                        <h3>Coxa</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="mdi-navigation-expand-more"></i>
+              Inativar
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <div class="col s12 profile">
+                  <br>
+                  <a href="alunos.html" class="waves-effect waves-light btn red" style="display: block;" onclick="alert('Deseja realmente inativar este aluno?');">Inativar aluno</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Perfil : end -->
 
-<p>
-  <strong>User:</strong>
-  <%= @aluno.user_id %>
-</p>
+  <!-- Anamnese : begin -->
+  <div id="workouts" class="col s12 no-padding">
+    <br>
+    <div class="row valign-wrapper">
+      <div class="col s12 no-padding">
+        <ul class="collection">
+          <a href="workout.html" class="collection-item">Fortalecimento - Abril <small style="color: #26a69a; font-weight: 500;">ATIVO</small>
+            <i class="mdi-navigation-chevron-right secondary-content right"></i>
+          </a>
+          <a href="workout.html" class="collection-item">Adaptação - Março
+            <i class="mdi-navigation-chevron-right secondary-content right"></i>
+          </a>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <a href="workouts_new.html" class="waves-effect waves-light btn" style="display: block;">Prescrever treino</a>
+      </div>
+    </div>
+  </div>
+  <!-- Anamnese : end -->
+</div>
 
-<%= link_to 'Edit', edit_aluno_path(@aluno) %> |
-<%= link_to 'Back', alunos_path %>
+
+<script type="text/javascript">
+  $(document).on('page:load', function(){
+    // Initialize collapse button
+    $('#sidenav-toggle').sideNav({
+        menuWidth: 300, // Default is 240
+        edge: 'right', // Choose the horizontal origin
+        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      }
+    );
+    $('.modal-trigger').leanModal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .2, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200 // Transition out duration
+    });
+
+  });
+</script>

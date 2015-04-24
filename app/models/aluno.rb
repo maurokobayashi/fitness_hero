@@ -30,4 +30,10 @@ class Aluno < ActiveRecord::Base
     now = Time.now.utc.to_date
     now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
   end
+
+  def humanize_gender
+    return "Feminino" if gender == "F"
+    return "Masculino" if gender == "M"
+    return "Outro" if gender == "O"
+  end
 end

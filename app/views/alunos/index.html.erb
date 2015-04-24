@@ -10,23 +10,8 @@
 </style>
 
 <!-- Navbar : begin -->
-<div class="navbar-fixed">
-  <nav>
-    <div class="nav-wrapper valign-wrapper">
-      <ul class="left">
-        <li><a href="index.html"><i class="mdi-navigation-arrow-back"></i></a></li>
-      </ul>
-      <span class="center-block center-align">
-        <span href="#!" class="flow-text valign">Meus alunos</span>
-      </span>
-      <ul class="right">
-        <li><a id="sidenav-toggle" href="#" data-activates="slide-out"><i class="mdi-navigation-menu"></i></a></li>
-      </ul>
-    </div>
-  </nav>
-</div>
+<%= render "commons/navbar", back_href: root_path, title: "Meus alunos" %>
 <!-- Navbar : end -->
-
 
 <!-- Sidenav : begin -->
 <%= render "commons/sidenav" %>
@@ -35,7 +20,7 @@
 <div class="row">
   <div class="col s12 no-padding">
     <ul class="tabs">
-      <li class="tab col s3"><a class="active" href="#new">Novos<span class="badge" style="float: none; font-size: .7em; font-weight: 500; position: relative; top: -5px;">(2)</span></a></li>
+      <li class="tab col s3"><a class="active" href="#new">Novos<span class="badge" style="float: none; font-size: .7em; font-weight: 500; position: relative; top: -5px;">(<%= @alunos.select{|a| a.pending?}.count %>)</span></a></li>
       <li class="tab col s3"><a href="#actives">Ativos</a></li>
       <li class="tab col s3"><a href="#inactives"> Inativos</a></li>
     </ul>
@@ -53,7 +38,7 @@
       <div class="col s12 no-padding">
         <ul class="collection">
           <% @alunos.select{|a| a.pending?}.each do |aluno| %>
-            <a href="<%= edit_aluno_path aluno %>" class="collection-item avatar">
+            <a href="<%= aluno_path aluno %>" class="collection-item avatar">
               <img src="<%= aluno.avatar %>" alt="" class="circle">
               <span class="title"><%= aluno.fullname %></span>
               <p style="color: #999; font-size: 1em;"><%= aluno.age %> anos - Iniciante</p>
@@ -78,7 +63,7 @@
       <div class="col s12 no-padding">
         <ul class="collection">
           <% @alunos.select{|a| a.active?}.each do |aluno| %>
-            <a href="<%= edit_aluno_path aluno %>" class="collection-item avatar">
+            <a href="<%= aluno_path aluno %>" class="collection-item avatar">
               <img src="<%= aluno.avatar %>" alt="" class="circle">
               <span class="title"><%= aluno.fullname %></span>
               <p style="color: #999; font-size: 1em;"><%= aluno.age %> anos - Iniciante</p>
@@ -103,7 +88,7 @@
       <div class="col s12 no-padding">
         <ul class="collection">
           <% @alunos.select{|a| a.inactive?}.each do |aluno| %>
-            <a href="<%= edit_aluno_path aluno %>" class="collection-item avatar">
+            <a href="<%= aluno_path aluno %>" class="collection-item avatar">
               <img src="<%= aluno.avatar %>" alt="" class="circle">
               <span class="title"><%= aluno.fullname %></span>
               <p style="color: #999; font-size: 1em;"><%= aluno.age %> anos - Iniciante</p>

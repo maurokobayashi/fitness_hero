@@ -4,6 +4,7 @@ small {
   letter-spacing: .02rem;
 }
 
+/* nav */
 nav {
   background-color: #333;
   color: #fff;
@@ -11,6 +12,8 @@ nav {
 nav ul a {
   color: #fff;
 }
+
+/* sidenav */
 .side-nav i {
   font-size: 1.6em;
   color: #26a69a !important;
@@ -19,6 +22,16 @@ nav ul a {
   color: #fff !important;
 }
 
+/* modal */
+.modal {
+  background-color: #fff;
+}
+.modal .modal-footer {
+  background-color: #fff;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* tabs */
 ul.tabs {
   /*margin-bottom: 5px;*/
 }
@@ -47,14 +60,19 @@ ul.tabs {
   background-color: #fff;
   margin: 0;
 }
+.collection.no-border {
+  border: none;
+}
 .collection a.collection-item:not(.active):hover {
   background-color: #F5F5F5;
 }
-a.collection-item {
-  color: #333 !important;
-  /*padding: 13px 20px 13px 25px !important;*/
+.collection .collection-item {
+  line-height: 1.8em;
 }
-.collection-item a {
+.collection a.collection-item {
+  color: #333 !important;
+}
+.collection .collection-item a {
   color: rgba(0, 0, 0, 0.87);
 }
 .collection-item a:hover {
