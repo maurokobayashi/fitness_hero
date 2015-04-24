@@ -25,6 +25,7 @@ module FitnessHero
 
     # Adding fonts folder to asset pipeline
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    # config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 
     # load /app/models/validators
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
