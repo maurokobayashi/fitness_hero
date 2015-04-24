@@ -28,5 +28,8 @@ module FitnessHero
 
     # load /app/models/validators
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
+
+    # Enable Rails 4 assets
+    config.serve_static_assets = true
   end
 end
