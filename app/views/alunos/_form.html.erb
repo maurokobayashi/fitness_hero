@@ -1,3 +1,93 @@
+<%= form_for @aluno, html: {class: "col s12 profile"} do |f| %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.text_field :first_name, class: "validate", length: "25" %>
+      <%= f.label :first_name, "Nome" %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.text_field :last_name, class: "validate", length: "50" %>
+      <%= f.label :last_name, "Sobrenome" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.text_field :email, class: "validate", length: "75" %>
+      <%= f.label :email, "Email" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.telephone_field :mobile, class: "validate", length: "15" %>
+      <%= f.label :mobile, "Celular" %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.date_field :birthdate, class: "datepicker", value: date_to_str(@aluno.birthdate) %>
+      <%= f.label :birthdate, "Nascimento" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6" style="margin-top: 0;">
+      <label for="gender">Sexo</label>
+      <%= f.select(:gender) do %>
+        <% [['Feminino', 'F'], ['Masculino', 'M'], ['Outro', 'O']].each do |c| -%>
+          <%= content_tag(:option, c.first, value: c.last) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="input-field col s12">
+      <input id="description" type="text" class="validate" length="50" value="Condomínio New Place">
+      <label for="description">Local de treino<small>- ex: Condomínio La Ville</small></label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s9">
+      <input id="street" type="text" class="validate" length="150" value="Av. Faria Lima">
+      <label for="street">Logradouro<small>- Rua, avenida, etc.</small></label>
+    </div>
+    <div class="input-field col s3">
+      <input id="number" type="text" class="validate" length="50" value="2928">
+      <label for="number">Número</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="complement" type="text" class="validate" length="50" value="8. andar">
+      <label for="complement">Complemento</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="district" type="text" class="validate" length="75" value="Itaim Bibi">
+      <label for="district">Bairro</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="complement" type="text" class="validate" length="50" value="São Paulo">
+      <label for="complement">Cidade</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="district" type="text" class="validate" length="75" value="SP">
+      <label for="district">Estado/UF</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea id="textarea1" class="materialize-textarea" length="255"></textarea>
+      <label for="textarea1">Observações</label>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col s12">
+      <a class="waves-effect waves-light btn block">Salvar</a>
+    </div>
+  </div>
+<% end %>
+
+
 <%= form_for(@aluno) do |f| %>
   <% if @aluno.errors.any? %>
     <div id="error_explanation">
